@@ -27,4 +27,9 @@ userSchema.methods.matchesPassword = function (password: string) {
   return compare(password, this.password)
 }
 
+// hide __v and password when do a print of the record
+userSchema.set('toJSON', {
+  transform: (doc, {__v, password, ...rest}, options) => rest
+})
+
 export const User = model<UserDocument>('User', userSchema)

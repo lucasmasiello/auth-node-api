@@ -1,8 +1,8 @@
 import express, { Response, NextFunction, Request } from 'express'
 import session, { Store } from 'express-session'
 import { SESSION_OPTIONS } from './config'
-import { register, login } from './routes'
-import { notFound, serverError } from './middlewares'
+import { register, login, home } from './routes'
+import { notFound, serverError, catchAsync, active } from './middlewares'
 
 export const createApp = (store: Store) => {
   const app = express()
@@ -15,9 +15,13 @@ export const createApp = (store: Store) => {
     })
   )
 
+  // all the request must be pass the "active" middleware
+  // app.use(catchAsync(active))
+
   // Routes
   app.use(login)
   app.use(register)
+  app.use(home)
 
   // Handle Errors
   app.use(notFound)
