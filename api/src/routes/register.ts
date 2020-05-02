@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { registerSchema } from '../models/parameters'
 import { User } from '../models/schemas'
 import { logIn } from '../auth'
 import { guest, catchAsync } from '../middlewares'
 import { validate } from '../helpers/validators/joi'
 import { BadRequest } from '../models'
+import { registerSchema } from '../helpers/validators/parameters'
 
 const router = Router()
 
