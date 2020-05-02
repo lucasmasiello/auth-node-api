@@ -17,3 +17,8 @@ export const registerSchema = Joi.object({
   passwordConfirmation
 })
 
+export const loginSchema = Joi.object({
+  email,
+  password
+})
+

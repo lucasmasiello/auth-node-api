@@ -1,7 +1,7 @@
 import express, { Response, NextFunction, Request } from 'express'
 import session, { Store } from 'express-session'
 import { SESSION_OPTIONS } from './config'
-import { register } from './routes'
+import { register, login } from './routes'
 import { notFound, serverError } from './middlewares'
 
 export const createApp = (store: Store) => {
@@ -15,10 +15,12 @@ export const createApp = (store: Store) => {
     })
   )
 
+  // Routes
+  app.use(login)
   app.use(register)
 
+  // Handle Errors
   app.use(notFound)
-
   app.use(serverError)
 
   return app
