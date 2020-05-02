@@ -14,7 +14,10 @@ router.post('/login', guest, catchAsync(async (req, res) => {
   const user = await User.findOne({ email })
 
   if (!user || !(await user.matchesPassword(password))) {
-    throw new Unauthorized('Incorrect email or password')
+    throw new Unauthorized(
+      'INCORRECT_EMAIL_OR_PASSWORD',
+      'Incorrect email or password'
+      )
   }
 
   logIn(req, user.id)

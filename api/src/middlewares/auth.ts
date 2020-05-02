@@ -8,7 +8,7 @@ import { SESSION_ABSOLUTE_TIMEOUT } from "../config";
 
 export const guest = (req: Request, res: Response, next: NextFunction) => {
   if (isLoggedIn(req)){
-    return(next(new BadRequest('You are already logged in')))
+    return(next(new BadRequest('ALREADY_LOGIN', 'You are already logged in')))
   }
 
   next()
@@ -16,7 +16,7 @@ export const guest = (req: Request, res: Response, next: NextFunction) => {
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
   if(!isLoggedIn(req)){
-    return next(new Unauthorized('You must be logged in'))
+    return next(new Unauthorized())
   }
 
   next()
@@ -32,7 +32,7 @@ export const active = catchAsync(
       if(now > createdAt + SESSION_ABSOLUTE_TIMEOUT){
         await logOut(req, res)
 
-        return next(new Unauthorized('Session expired'))
+        return next(new Unauthorized('SESSION_EXPIRED', 'Session expired'))
       }
     }
 
