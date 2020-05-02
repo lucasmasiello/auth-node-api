@@ -13,5 +13,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1"
+  },
+  "devDependencies": {
+    "@types/hapi__joi": "^16.0.12"
+  }
 }
