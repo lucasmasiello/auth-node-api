@@ -2,6 +2,7 @@ import express  from 'express'
 import { register, login, home, verify } from './routes'
 import { notFound, serverError } from './middlewares'
 import { Context } from './models/context'
+import { runInNewContext } from 'vm'
 
 export const createApp = () => {
   const app = express()
@@ -10,11 +11,13 @@ export const createApp = () => {
   // all the request must be pass the "active" middleware
   // app.use(catchAsync(active))
 
-  app.use((req) => {
+  app.use((req, res, next) => {
     const context = new Context()
     context.id = new Date().toString()
+    
 
-    // req.context = context
+    req.context = context
+    next()
   })
 
   // Routes

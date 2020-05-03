@@ -1,4 +1,4 @@
-interface UserDocument extends Document {
+declare interface IUser{
   email: string
   name: string
   password: string
@@ -7,15 +7,19 @@ interface UserDocument extends Document {
   verificationUrl: () => string
 }
 
-declare class Context {
-  user: UserDocument
-  logger: any
-  id: string
+declare interface ILogger{
+  error: () => any
+  info: () => any
+}
+
+declare interface IContext{
+  id?: string
+  logger?: ILogger
+  user?: IUser
 }
 
 declare namespace Express {
   interface Request {
-    context: Context
-    boo?: string;
+    context: IContext
   }
 }

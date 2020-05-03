@@ -9,7 +9,8 @@ export const auth = catchAsync(async (req: Request, res: Response, next: NextFun
   if(!token) throw new Unauthorized()
 
   let user = await validateToken(token) as UserDocument
-  // req.context.user = user
+  
+  req.context.user = user
   
   console.log(user)
   next()
