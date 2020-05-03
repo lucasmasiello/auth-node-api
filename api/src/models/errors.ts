@@ -1,14 +1,16 @@
 abstract class HttpError extends Error {
   public status!: number
   public code!: string
+  public innerError!: any
 }
 
 export class BadRequest extends HttpError {
-  constructor(code = 'BAD_REQUEST', message = 'bad request'){
+  constructor(code = 'BAD_REQUEST', message = 'bad request', innerError?: any){
     super(message)
 
     this.status = 400
     this.code = code
+    this.innerError = innerError
   }
 }
 

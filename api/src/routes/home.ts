@@ -1,13 +1,9 @@
 import { Router } from "express";
-import { User } from "../models";
-import { catchAsync, auth } from "../middlewares";
+import { auth } from "../middlewares";
+import { home } from "../actions/home";
 
 const router = Router()
 
-router.get('/home', auth, catchAsync(async (req, res) => {
-  const user = await User.findById(req.session!.userId)
-  return res.json(user)
-}))
-
+router.get('/home', auth, home)
 
 export default router

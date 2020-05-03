@@ -2,13 +2,37 @@ import Joi from '@hapi/joi'
 import { BCRYPT_MAX_BYTES } from '../../../config'
 
 const email = Joi.string().min(8).max(254).lowercase().trim().required()
+  .messages({
+    'string.base': 'Should be type of text',
+    'string.min': 'Should have a minimun length of {#limit}',
+    'string.max': 'Should have a maximun length of {#limit}',
+    'string.pattern.base': 'Must contain one uppercase letter, one lowercase letter, and one digit',
+    'any.required': 'Required field'
+  })
 const name = Joi.string().min(3).max(128).trim().required()
+  .messages({
+    'string.base': 'Should be type of text',
+    'string.min': 'Should have a minimun length of {#limit}',
+    'string.max': 'Should have a maximun length of {#limit}',
+    'string.pattern.base': 'Must contain one uppercase letter, one lowercase letter, and one digit',
+    'any.required': 'Required field'
+  })
 // bcrypt has a limitation of 72 bytes for hash password
 const password = Joi.string().min(8).max(BCRYPT_MAX_BYTES, 'utf8')
   .regex(/^(?=.*?[\p{Lu}])(?=.*?[\p{Ll}])(?=.*?\d).*$/u)
-  .message('"{#label}" must contain one uppercase letter, one lowercase letter, and one digit')
   .required()
-const passwordConfirmation = Joi.valid(Joi.ref('password')).required()
+  .messages({
+    'string.base': 'Should be type of text',
+    'string.min': 'Should have a minimun length of {#limit}',
+    'string.pattern.base': 'Must contain one uppercase letter, one lowercase letter, and one digit',
+    'any.required': 'Required field'
+  })
+const passwordConfirmation = Joi.valid(Joi.ref('password'))
+  .required()
+  .messages({
+    'any.only': 'Must be equal to Password field',
+    'any.required': 'Required field'
+  })
 
 export const registerSchema = Joi.object({
   email,

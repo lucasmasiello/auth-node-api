@@ -19,6 +19,7 @@ export const serverError = (err: any, req: Request, res: Response, next: NextFun
     // .json({ message: err.message || 'Internal Server Error' })
     .json({
       errorCode: err.code || 'BAD_GATEWAY',
-      errorMessage: err.message || 'Internal Server Error'
+      errorMessage: err.message || 'Internal Server Error',
+      errorDetails: err.innerError || null
     })
 }
