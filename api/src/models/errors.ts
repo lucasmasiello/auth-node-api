@@ -1,24 +1,24 @@
-abstract class HttpError extends Error {
+export class HttpError extends Error {
   public status!: number
   public code!: string
   public innerError!: any
-}
 
-export class BadRequest extends HttpError {
-  constructor(code = 'BAD_REQUEST', message = 'bad request', innerError?: any){
+  constructor(status: number, code: string, message: string, innerError?: any){
     super(message)
-
-    this.status = 400
+    this.status = status
     this.code = code
     this.innerError = innerError
   }
 }
 
-export class Unauthorized extends HttpError {
-  constructor(code = 'UNAUTHORIZED', message = 'Unauthorized'){
-    super(message)
+export class BadRequest extends HttpError {
+  constructor(status = 400, code = 'BAD_REQUEST', message = 'bad request', innerError?: any){
+    super(status, code, message, innerError ? innerError : undefined)
+  }
+}
 
-    this.status = 401
-    this.code = code
+export class Unauthorized extends HttpError {
+  constructor(status = 401, code = 'UNAUTHORIZED', message = 'Unauthorized', innerError?: any){
+    super(status, code, message, innerError ? innerError : undefined)
   }
 }

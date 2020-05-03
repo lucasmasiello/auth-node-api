@@ -1,41 +1,16 @@
-import { Request, Response, NextFunction } from "express";
-import { isLoggedIn, logOut } from "../auth";
-import { BadRequest, Unauthorized } from "../models";
-import { runInNewContext } from "vm";
+import { Response, NextFunction, Request } from "express";
+import { validateToken } from "../auth";
 import { catchAsync } from "./errors";
-import { createApp } from "../app";
-import { SESSION_ABSOLUTE_TIMEOUT } from "../config";
+import { Unauthorized, UserDocument } from "../models";
 
-export const guest = (req: Request, res: Response, next: NextFunction) => {
-  if (isLoggedIn(req)){
-    return(next(new BadRequest('ALREADY_LOGIN', 'You are already logged in')))
-  }
+export const auth = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers['x-access-token'] as string
 
+  if(!token) throw new Unauthorized()
+
+  let user = await validateToken(token) as UserDocument
+  // req.context.user = user
+  
+  console.log(user)
   next()
-}
-
-export const auth = (req: Request, res: Response, next: NextFunction) => {
-  if(!isLoggedIn(req)){
-    return next(new Unauthorized())
-  }
-
-  next()
-}
-
-// active middleware add an absolute timeout session
-// if the user is logged and the cookies is older than the absolute timeout, logout the user
-export const active = catchAsync(
-  async(req: Request, res: Response, next: NextFunction) => {
-    if(isLoggedIn(req)){
-      const now = Date.now()
-      const {createdAt} = req.session as Express.Session
-      if(now > createdAt + SESSION_ABSOLUTE_TIMEOUT){
-        await logOut(req, res)
-
-        return next(new Unauthorized('SESSION_EXPIRED', 'Session expired'))
-      }
-    }
-
-    next()
-  }
-)
+})

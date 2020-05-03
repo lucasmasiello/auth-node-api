@@ -2,6 +2,14 @@ const ONE_HOUR = 1000 * 60 * 60
 
 const TWELVE_HOURS = ONE_HOUR * 12
 
+const { env } = process
+
+// Jwt
+export const {
+    JWT_SIGN_KEY = 'super-secret-sign-key',
+    JWT_EXPIRATION = 86400
+} = env
+
 // Bcrypt
 
 export const BCRYPT_WORK_FACTOR = 12
