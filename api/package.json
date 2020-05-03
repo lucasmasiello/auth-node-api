@@ -19,7 +19,8 @@
     "express-session": "^1.17.1",
     "ioredis": "^4.16.3",
     "mongodb": "^3.5.7",
-    "mongoose": "^5.9.11"
+    "mongoose": "^5.9.11",
+    "nodemailer": "^6.4.6"
   },
   "devDependencies": {
     "@types/connect-redis": "0.0.13",
@@ -29,6 +30,7 @@
     "@types/mongodb": "^3.5.14",
     "@types/mongoose": "^5.7.14",
     "@types/node": "^13.13.4",
+    "@types/nodemailer": "^6.4.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   }
