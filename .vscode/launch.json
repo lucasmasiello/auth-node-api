@@ -5,13 +5,13 @@
             "type": "node",
             "request": "launch",
             "name": "Build Project",
-            "program": "${workspaceFolder}/api/src/index.ts",
+            "program": "${workspaceFolder}/src/index.ts",
             "preLaunchTask": "npm: build",
             "sourceMaps": true,
             "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
             "outFiles": [
-                "${workspaceFolder}/api/dist/index.js"
+                "${workspaceFolder}/dist/index.js"
             ]
         }
     ]

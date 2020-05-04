@@ -1,4 +1,14 @@
 # auth-node-api
+
+## dependencies
+- Docker Compose : https://docs.docker.com/compose/install/
+- Postman (for test purpose) : https://www.postman.com/downloads/
+
+## run dev
+```sh
+npm i
+npm up
+```
  
 ## curl
 
