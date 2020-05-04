@@ -8,13 +8,14 @@ declare interface IUser{
 }
 
 declare interface ILogger{
-  error: () => any
-  info: () => any
+  error: (message: object) => void
+  info: (message: object) => void
+  debug: (message: object) => void
 }
 
 declare interface IContext{
-  id?: string
-  logger?: ILogger
+  id: string
+  logger: ILogger
   user?: IUser
 }
 
