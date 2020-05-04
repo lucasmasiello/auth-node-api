@@ -1,4 +1,4 @@
-# mtg-node-api
+# auth-node-api
  
 ## curl
 
@@ -9,7 +9,7 @@ curl -X POST localhost:3000/register -H 'Content-Type: application/json' -d '{"e
 
 ## docker
 ```sh
-docker exec -it mtg-node-api_db_1 mongo -u admin -p secret auth
+docker exec -it auth-node-api_db_1 mongo -u admin -p secret auth
 db
 ## select all
 db.users.find({}).pretty()
