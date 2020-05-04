@@ -40,7 +40,7 @@ userSchema.methods.verificationUrl = function () {
   const token = createHash('sha1').update(this.email).digest('hex')
   const expires = Date.now() + EMAIL_VERIFICATION_TIMEOUT
 
-  const url = `${APP_ORIGIN}/email/verify?id=${this.id}&token=${token}&expires=${expires}`
+  const url = `${APP_ORIGIN}/verify-user?id=${this.id}&token=${token}&expires=${expires}`
   const signature = User.signVerificationUrl(url)
 
   return `${url}&signature=${signature}`

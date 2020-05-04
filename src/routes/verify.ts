@@ -3,8 +3,8 @@ import { verify, resend } from '../actions/verify'
 
 const router = Router()
 
-router.get('/email/verify', verify)
+router.get('/verify-user', verify)
 
-router.post('/email/resend', resend)
+router.post('/verify-user/resend', resend)
 
 export default router

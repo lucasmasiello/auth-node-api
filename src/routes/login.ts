@@ -3,6 +3,6 @@ import { login } from '../actions'
 
 const router = Router()
 
-router.post('/auth', login)
+router.post('/login', login)
 
 export default router

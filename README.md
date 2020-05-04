@@ -9,13 +9,6 @@
 npm i
 npm up
 ```
- 
-## curl
-
-```sh
-curl -X POST localhost:3000/register -H 'Content-Type: application/json' -d '{"email": "0001@gmail.com", "name": "Test 1", "password": "Qwerty123", "passwordConfirmation": "Qwerty123"}'
-```
-
 
 ## docker
 ```sh

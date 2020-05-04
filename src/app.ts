@@ -1,8 +1,7 @@
 import express  from 'express'
-import { register, login, home, verify } from './routes'
+import { register, login, home, verify, reset } from './routes'
 import { notFound, serverError } from './middlewares'
 import { Context } from './models/context'
-import { runInNewContext } from 'vm'
 
 export const createApp = () => {
   const app = express()
@@ -25,6 +24,7 @@ export const createApp = () => {
   app.use(register)
   app.use(home)
   app.use(verify)
+  app.use(reset)
 
   // Handle Errors
   app.use(notFound)
