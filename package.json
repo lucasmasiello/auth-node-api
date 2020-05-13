@@ -11,8 +11,13 @@
     "postup": "npm run dev",
     "stop": "docker-compose stop",
     "down": "docker-compose down",
-    "eslint": "eslint . --ext .ts",
-    "eslint:fix": "prettier-eslint $PWD/'**/*.ts' --write"
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "prettier-eslint $PWD/'**/*.ts' --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "keywords": [],
   "author": "",
@@ -52,6 +57,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
     "prettier-eslint": "^9.0.1",
     "prettier-eslint-cli": "^5.0.0",
     "ts-node-dev": "^1.0.0-pre.44",
