@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { auth } from "../middlewares";
-import { home } from "../actions/home";
+import { Router } from 'express'
+import { auth } from '../middlewares'
+import { home } from '../actions/home'
 
 const router = Router()
 

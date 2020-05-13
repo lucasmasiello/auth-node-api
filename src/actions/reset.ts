@@ -1,10 +1,13 @@
-import { catchAsync } from "../middlewares"
-import { validate } from "../helpers/validators/joi"
-import { forgotPasswordSchema, resetPasswordSchema } from "../helpers/validators/parameters"
-import { User, BadRequest } from "../models"
-import { PasswordReset } from "../models/schemas/reset"
-import { sendMail } from "../helpers/mail"
-import { resetPassword } from "../auth"
+import { catchAsync } from '../middlewares'
+import { validate } from '../helpers/validators/joi'
+import {
+  forgotPasswordSchema,
+  resetPasswordSchema
+} from '../helpers/validators/parameters'
+import { User, BadRequest } from '../models'
+import { PasswordReset } from '../models/schemas/reset'
+import { sendMail } from '../helpers/mail'
+import { resetPassword } from '../auth'
 
 export const emailReset = catchAsync(async (req, res) => {
   await validate(forgotPasswordSchema, req.body)
@@ -24,7 +27,10 @@ export const emailReset = catchAsync(async (req, res) => {
     })
   }
 
-  res.json({ message: 'If you have an account with us, you will receive an email with a link to reset your password' })
+  res.json({
+    message:
+      'If you have an account with us, you will receive an email with a link to reset your password'
+  })
 })
 
 export const reset = catchAsync(async ({ query, body }, res) => {
@@ -36,8 +42,16 @@ export const reset = catchAsync(async ({ query, body }, res) => {
   const reset = await PasswordReset.findById(id)
   let user
 
-  if (!reset || !reset.isValid(token as string) || !(user = await User.findById(reset.userId))) {
-    throw new BadRequest(400, 'INVALID_RESET_TOKEN', 'Invalid password reset token')
+  if (
+    !reset ||
+    !reset.isValid(token as string) ||
+    !(user = await User.findById(reset.userId))
+  ) {
+    throw new BadRequest(
+      400,
+      'INVALID_RESET_TOKEN',
+      'Invalid password reset token'
+    )
   }
 
   await Promise.all([

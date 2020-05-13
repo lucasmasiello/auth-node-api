@@ -1,12 +1,10 @@
 import mongoose from 'mongoose'
 import { MONGO_URI, MONGO_OPTIONS, APP_PORT } from './config'
 import { createApp } from './app'
-
 ;(async () => {
-    await mongoose.connect(MONGO_URI, MONGO_OPTIONS)
+  await mongoose.connect(MONGO_URI, MONGO_OPTIONS)
 
-    const app = createApp()
+  const app = createApp()
 
-    app.listen(APP_PORT, () => console.log(`http://localhost${APP_PORT}`))
-  })();
-
+  app.listen(APP_PORT, () => console.log(`http://localhost${APP_PORT}`))
+})()

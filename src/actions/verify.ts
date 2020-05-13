@@ -1,9 +1,12 @@
-import { catchAsync } from "../middlewares"
-import { validate } from "../helpers/validators/joi"
-import { User, HttpError } from "../models"
-import { verifyEmailSchema, resendEmailSchema } from "../helpers/validators/parameters"
-import { markAsVerified } from "../auth"
-import { sendMail } from "../helpers/mail"
+import { catchAsync } from '../middlewares'
+import { validate } from '../helpers/validators/joi'
+import { User, HttpError } from '../models'
+import {
+  verifyEmailSchema,
+  resendEmailSchema
+} from '../helpers/validators/parameters'
+import { markAsVerified } from '../auth'
+import { sendMail } from '../helpers/mail'
 
 export const verify = catchAsync(async (req, res) => {
   await validate(verifyEmailSchema, req.query)
@@ -21,11 +24,7 @@ export const verify = catchAsync(async (req, res) => {
   }
 
   if (user.verifiedAt) {
-    throw new HttpError(
-      400,
-      'ALREADY_VERIFIED',
-      'User already verified'
-    )
+    throw new HttpError(400, 'ALREADY_VERIFIED', 'User already verified')
   }
 
   await markAsVerified(user)
@@ -51,6 +50,7 @@ export const resend = catchAsync(async (req, res) => {
   }
 
   res.json({
-    message: 'If your email address needs to be verified, you will receive an email with the activation link'
+    message:
+      'If your email address needs to be verified, you will receive an email with the activation link'
   })
 })

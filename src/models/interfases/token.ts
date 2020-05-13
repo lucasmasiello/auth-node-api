@@ -1,3 +1,3 @@
 export interface IJwtToken {
-    id: string
+  id: string
 }

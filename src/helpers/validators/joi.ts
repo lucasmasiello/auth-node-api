@@ -1,9 +1,17 @@
 import mongoose from 'mongoose'
-import joi, { ObjectSchema, ValidationError, ExtensionFactory, Root, StringSchema } from "@hapi/joi";
-import { HttpError } from "../../models";
+import joi, {
+  ObjectSchema,
+  ValidationError,
+  ExtensionFactory,
+  Root,
+  StringSchema
+} from '@hapi/joi'
+import { HttpError } from '../../models'
 
-
-interface IDetailError {message: string, field: string}
+interface IDetailError {
+  message: string
+  field: string
+}
 
 const objectId: ExtensionFactory = joi => ({
   type: 'objectId',
@@ -29,10 +37,13 @@ export const validate = async (schema: ObjectSchema, payload: any) => {
     await schema.validateAsync(payload, { abortEarly: false })
   } catch (error) {
     const { details } = error as ValidationError
-    const detailsError = details.map(detail => <IDetailError>{
-      message: detail.message,
-      field: detail.path[0]
-    })
+    const detailsError = details.map(
+      detail =>
+        <IDetailError>{
+          message: detail.message,
+          field: detail.path[0]
+        }
+    )
 
     throw new HttpError(
       400,

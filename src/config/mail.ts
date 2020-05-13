@@ -1,5 +1,5 @@
 import { Options } from 'nodemailer/lib/smtp-connection'
-import { IN_PROD, APP_HOSTNAME } from './app'
+import { IN_PROD } from './app'
 
 const {
   SMTP_HOST = 'in-v3.mailjet.com',
@@ -18,4 +18,4 @@ export const SMTP_OPTIONS: Options = {
   }
 }
 
-export const MAIL_FROM =  'lucasgr90@gmail.com' //`noreply@${APP_HOSTNAME}`
+export const MAIL_FROM = 'lucasgr90@gmail.com' // `noreply@${APP_HOSTNAME}`

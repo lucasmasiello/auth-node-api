@@ -1,6 +1,11 @@
 import { Schema, Document, Model, model } from 'mongoose'
 import { randomBytes, createHmac, timingSafeEqual } from 'crypto'
-import { PASSWORD_RESET_BYTES, APP_SECRET, PASSWORD_RESET_TIMEOUT, APP_ORIGIN } from '../../config'
+import {
+  PASSWORD_RESET_BYTES,
+  APP_SECRET,
+  PASSWORD_RESET_TIMEOUT,
+  APP_ORIGIN
+} from '../../config'
 
 interface PasswordResetDocument extends Document {
   userId: string
@@ -15,16 +20,19 @@ interface PasswordResetModel extends Model<PasswordResetDocument> {
   hashedToken: (plaintextToken: string) => string
 }
 
-const passwordResetSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
+const passwordResetSchema = new Schema(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    token: String,
+    expiredAt: Date
   },
-  token: String,
-  expiredAt: Date
-}, {
-  timestamps: { createdAt: true, updatedAt: false }
-})
+  {
+    timestamps: { createdAt: true, updatedAt: false }
+  }
+)
 
 passwordResetSchema.pre<PasswordResetDocument>('save', function () {
   if (this.isModified('token')) {
@@ -42,8 +50,10 @@ passwordResetSchema.methods.url = function (plaintextToken: string) {
 
 passwordResetSchema.methods.isValid = function (plaintextToken: string) {
   const hash = PasswordReset.hashedToken(plaintextToken)
-  return timingSafeEqual(Buffer.from(hash), Buffer.from(this.token)) &&
+  return (
+    timingSafeEqual(Buffer.from(hash), Buffer.from(this.token)) &&
     this.expiredAt > new Date()
+  )
 }
 
 passwordResetSchema.statics.plaintextToken = () => {
@@ -51,7 +61,12 @@ passwordResetSchema.statics.plaintextToken = () => {
 }
 
 passwordResetSchema.statics.hashedToken = (plaintextToken: string) => {
-  return createHmac('sha256', APP_SECRET).update(plaintextToken).digest('hex')
+  return createHmac('sha256', APP_SECRET)
+    .update(plaintextToken)
+    .digest('hex')
 }
 
-export const PasswordReset = model<PasswordResetDocument, PasswordResetModel>('PasswordReset', passwordResetSchema)
+export const PasswordReset = model<PasswordResetDocument, PasswordResetModel>(
+  'PasswordReset',
+  passwordResetSchema
+)

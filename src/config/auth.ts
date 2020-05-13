@@ -6,8 +6,8 @@ const { env } = process
 
 // Jwt
 export const {
-    JWT_SIGN_KEY = 'super-secret-sign-key',
-    JWT_EXPIRATION = 86400
+  JWT_SIGN_KEY = 'super-secret-sign-key',
+  JWT_EXPIRATION = 86400
 } = env
 
 // Bcrypt

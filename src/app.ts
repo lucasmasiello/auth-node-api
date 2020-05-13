@@ -1,5 +1,5 @@
 import express from 'express'
-import { middleware, set, get } from 'express-http-context'
+import { middleware } from 'express-http-context'
 import { v1 } from 'uuid'
 import { register, login, home, verify, reset } from './routes'
 import { notFound, serverError } from './middlewares'
@@ -16,10 +16,7 @@ export const createApp = () => {
 
   // set context variables on the request
   app.use((req, res, next) => {
-    const context = new Context(
-      v1(),
-      new Logger(v1())
-    )
+    const context = new Context(v1(), new Logger(v1()))
 
     req.context = context
     next()

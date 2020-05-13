@@ -1,4 +1,4 @@
-declare interface IUser{
+declare interface IUser {
   email: string
   name: string
   password: string
@@ -7,13 +7,13 @@ declare interface IUser{
   verificationUrl: () => string
 }
 
-declare interface ILogger{
+declare interface ILogger {
   error: (message: object) => void
   info: (message: object) => void
   debug: (message: object) => void
 }
 
-declare interface IContext{
+declare interface IContext {
   id: string
   logger: ILogger
   user?: IUser
