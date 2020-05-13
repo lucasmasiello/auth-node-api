@@ -8,7 +8,7 @@ export const createToken = (userId: string) => {
     expiresIn: JWT_EXPIRATION // 86400 // expires in 24 hours
   })
 
-  				return token
+  return token
 }
 
 export const validateToken = async (token: string): Promise<any> => {
