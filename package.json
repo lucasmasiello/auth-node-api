@@ -12,11 +12,12 @@
     "stop": "docker-compose stop",
     "down": "docker-compose down",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "prettier-eslint $PWD/'**/*.ts' --write"
+    "lint:fix": "prettier-eslint $PWD/'**/*.ts' --write",
+    "test": "npx jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint && npm run test"
     }
   },
   "keywords": [],
