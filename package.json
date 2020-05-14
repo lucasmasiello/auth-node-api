@@ -13,7 +13,8 @@
     "down": "docker-compose down",
     "lint": "eslint . --ext .ts",
     "lint:fix": "prettier-eslint $PWD/'**/*.ts' --write",
-    "test": "npx jest"
+    "test": "jest",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "husky": {
     "hooks": {
@@ -53,6 +54,7 @@
     "@types/nodemailer": "^6.4.0",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
+    "coveralls": "^3.1.0",
     "eslint": "^7.0.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
