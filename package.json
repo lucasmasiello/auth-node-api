@@ -8,6 +8,7 @@
     "build": "tsc",
     "dev": "ts-node-dev --transpileOnly --no-notify src",
     "up": "mkdir -p data && docker-compose up -d",
+    "start": "node app.js",
     "postup": "npm run dev",
     "stop": "docker-compose stop",
     "down": "docker-compose down",
